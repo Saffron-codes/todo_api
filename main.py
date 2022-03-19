@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import FastAPI,HTTPException
+from fastapi import FastAPI,HTTPException,responses
 import fastapi
 import uvicorn
 from db_funcs import DBCrud
@@ -12,7 +12,7 @@ mytodos = []
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+     return responses.RedirectResponse(url='/docs')
 
 
 @app.post("/api/v1/todos")
