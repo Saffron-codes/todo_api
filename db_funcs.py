@@ -32,12 +32,16 @@ class DBCrud():
         todos = []
         try:
             # cur.execute("SELECT * FROM Users WHERE NAME=?",[username])
-            res = cur.execute("SELECT todo FROM todos WHERE userid=?",[userId])
+            res = cur.execute("SELECT * FROM todos WHERE userid=?",[userId])
             # res = conn.execute("SELECT todo FROM todos WHERE userid=(?);",[userId])
             for todo in res:
+                print(todo)
                 # todos.append(str(todo).split("'")[1])
                 # print(todo[0])
-                todos.append(todo[0])
+                todos.append(
+                    {"id":todo[3],
+                    "todo":todo[2]
+                    })
             # if todos == []:
             #     return {"message":"error retreiving todos"}
             return todos
