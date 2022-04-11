@@ -4,7 +4,7 @@ import fastapi
 import uvicorn
 from db_funcs import DBCrud
 
-from todo import Todo
+from todo import NewTodo, Todo
 
 app = FastAPI()
 
@@ -20,9 +20,9 @@ async def createTodo(todo:Todo):
     response = DBCrud().createtodo(todo)
     return response
 
-@app.post("/api/v1/todos/update/{userId}")
-async def updateTodo(userId:str,todoId:str,newtodo):
-    response = DBCrud().updatetodo(userId,todoId,newtodo)
+@app.post("/api/v1/todos/update")
+async def updateTodo(todo:NewTodo):
+    response = DBCrud().updatetodo(todo.userid,todo.todoid,todo.newtodo)
     return response
 
 @app.delete("/api/v1/todos/delete/{userId}")
